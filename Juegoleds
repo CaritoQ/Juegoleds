@@ -1,0 +1,82 @@
+//Juego de leds
+
+String codigo;
+int juego[5] = {8, 9, 10, 11, 12};
+int l;
+void setup() {
+  for (; l < 5; l++) {
+    pinMode(juego[l], OUTPUT);
+  }
+  Serial.begin(9600);
+  Serial.println("Códigos de activación");
+  Serial.println("Inserte : ACBF para activar el primer juego, ACGF para activar el segundo juego, ADBF para activar el tercer juego o ADBH para activar el cuarto juego");
+  Serial.println("Ingrese el código de juego");
+}
+void loop() {
+  if (Serial.available() > 0) {
+    codigo = Serial.readString();
+ 
+    if (codigo == "ACBF") {
+      juego1();
+
+    }
+    else if (codigo == "ACGF") {
+      juego2();
+    }
+    else if (codigo == "ADBF") {
+      juego3();
+    }
+    else if (codigo == "ADBH") {
+      juego4();
+    }
+  }
+}
+void juego1() {
+
+  for (l = 0; l < 5; l++)
+  {
+    digitalWrite(juego[l], HIGH);
+    digitalWrite(juego[4 - l], HIGH);
+    delay(500);
+    digitalWrite(juego[l], LOW);
+    digitalWrite(juego[4 - l], LOW);
+  }
+}
+void juego2() {
+ 
+  for (l = 0; l < 5; l++)
+  {
+    digitalWrite(juego[l], HIGH);
+    delay(500);
+    digitalWrite(juego[l], LOW);
+    delay(500);
+    digitalWrite(juego[4 - l], HIGH);
+    delay(500);
+    digitalWrite(juego[4 - l], LOW);
+  }
+
+}
+void juego3() {
+  Serial.println("Inicio del Juego 3");
+  for (l = 0; l < 5; l++)
+  {
+    digitalWrite(juego[l], HIGH);
+    delay(500);
+  }
+  for (l = 4; l >= 0; l--)
+  {
+    digitalWrite(juego[l], LOW);
+    delay(500);
+  }
+
+}
+void juego4() {
+ 
+  for (l = 0; l < 5; l++)
+  {
+    digitalWrite(juego[l], HIGH);
+    delay(500);
+    digitalWrite(juego[l], LOW);
+    l++;
+  }
+  }
